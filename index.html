@@ -6,68 +6,121 @@
     <title>Расчет бюджета</title>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body>
+  <body id="body">
+    <header class="menu" id="menu">
+      <div class="menu__box">
+        <button class="menu__item menu__item-1" id="vols-btn">ВОЛС</button>
+        <button class="menu__item menu__item-2" id="gen5-btn">5G</button>
+      </div>
+    </header>
     <div class="container">
-      <div class="content">
-        <h2 class="content__title">Калькулятор</h2>
-        <form class="content__values">
+      <div class="content" id="content-height">
+        <h2 class="content__title" id="content__title-gen5">Калькулятор 5G</h2>
+        <h2 class="content__title content__title-vols" id="content__title-vols">
+          Калькулятор ВОЛС
+        </h2>
+        <form class="content__values" id="vols-form">
           <p class="content__info-text">
             длина кабельной линии связи <i>L, км</i>
           </p>
           <input
             type="number"
-            class="content__input content__input-1"
-            placeholder="..."
+            class="content__input content__input-vols"
+            placeholder="120"
           />
-          <p class="content__info-text">
+          <p class="content__info-text content__info-text-vols">
             строительная длина кабеля <i>l<sub>s</sub> , км</i>
           </p>
           <input
             type="number"
-            class="content__input content__input-2"
-            placeholder="..."
+            class="content__input content__input-vols"
+            placeholder="5"
           />
-
-          <p class="content__info-text">
+          <p class="content__info-text content__info-text-vols">
             потери на сварном соединении <i>α<sub>св</sub> , дБ</i>
           </p>
           <input
             type="number"
-            class="content__input content__input-3"
+            class="content__input content__input-vols"
             value="0.05"
           />
-
-          <p class="content__info-text">
+          <p class="content__info-text content__info-text-vols">
             коэффициент затухания волокна <i>α<sub>ов</sub> , дБ</i>
           </p>
           <input
             type="number"
-            class="content__input content__input-4"
-            placeholder="..."
+            class="content__input content__input-vols"
+            placeholder="0.01"
           />
-
-          <p class="content__info-text">
+          <p class="content__info-text content__info-text-vols">
             потери на разъемном соединении (коннекторе)
             <i>α<sub>КОН</sub> , дБ</i>
           </p>
           <input
             type="number"
-            class="content__input content__input-5"
-            placeholder="..."
+            class="content__input content__input-vols"
+            placeholder="0.01"
           />
-
-          <p class="content__info-text">
+          <p class="content__info-text content__info-text-vols">
             число разъемных соединений <i>N<sub>КОН</sub> , шт</i>
           </p>
-          <input
-            type="number"
-            class="content__input content__input-6"
-            placeholder="..."
-          />
+          <input type="number" class="content__input" placeholder="10" />
+        </form>
+        <form class="content__values" id="gen5-form">
+          <p class="content__info-text">
+            длина кабельной линии связи <i>L, км</i>
+          </p>
+          <input type="number" class="content__input" placeholder="120" />
+          <p class="content__info-text">
+            строительная длина кабеля <i>l<sub>s</sub> , км</i>
+          </p>
+          <input type="number" class="content__input" placeholder="5" />
+          <p class="content__info-text">
+            потери на сварном соединении <i>α<sub>св</sub> , дБ</i>
+          </p>
+          <input type="number" class="content__input" value="0.05" />
+          <p class="content__info-text">
+            коэффициент затухания волокна <i>α<sub>ов</sub> , дБ</i>
+          </p>
+          <input type="number" class="content__input" placeholder="0.01" />
+          <p class="content__info-text">
+            длина кабельной линии связи <i>L, км</i>
+          </p>
+          <input type="number" class="content__input" placeholder="120" />
+          <p class="content__info-text">
+            строительная длина кабеля <i>l<sub>s</sub> , км</i>
+          </p>
+          <input type="number" class="content__input" placeholder="5" />
+          <p class="content__info-text">
+            потери на сварном соединении <i>α<sub>св</sub> , дБ</i>
+          </p>
+          <input type="number" class="content__input" value="0.05" />
+          <p class="content__info-text">
+            коэффициент затухания волокна <i>α<sub>ов</sub> , дБ</i>
+          </p>
+          <input type="number" class="content__input" placeholder="0.01" />
+          <p class="content__info-text">
+            потери на сварном соединении <i>α<sub>св</sub> , дБ</i>
+          </p>
+          <input type="number" class="content__input" value="0.05" />
+          <p class="content__info-text">
+            коэффициент затухания волокна <i>α<sub>ов</sub> , дБ</i>
+          </p>
+          <input type="number" class="content__input" placeholder="0.01" />
         </form>
         <div class="content__output">
-          <button class="btn btn-calculate" id="calculate">Расчитать</button>
-          <p class="content__price">Потери: <span id="price"></span></p>
+          <button class="btn btn-calculate" id="calculate-vols">
+            Рассчитать
+          </button>
+          <button class="btn btn-calculate" id="calculate-gen5">
+            Рассчитать
+          </button>
+          <p class="content__price" id="vols-loss-text">
+            Потери: <span id="vols-loss-out"></span>
+          </p>
+          <p class="content__price" id="gen5-power-text">
+            Бюджет мощности: <span id="gen5-power-out"></span>
+          </p>
         </div>
       </div>
     </div>

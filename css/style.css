@@ -18,7 +18,6 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
 /* Firefox */
 input[type="number"] {
     -moz-appearance: textfield;
@@ -31,21 +30,60 @@ body {
 sub {
     font-size: 10px;
 }
+.menu {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-150px);
+    height: 40px;
+    background-color: #4d84c4;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0px 0px 10px 0 rgba(0, 0, 0, 0.4);
+}
+.menu__box {
+    text-align: center;
+    font-size: 0;
+}
+.menu__item {
+    cursor: pointer;
+    color: #ffffff;
+    width: 150px;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 40px;
+    background-color: transparent;
+    letter-spacing: 2px;
+    background-color: #4d84c4;
+    transition: background-color 0.2s ease-in-out;
+    outline: 0;
+}
+.menu__item:first-of-type {
+    border-right: 1px solid rgba(255, 255, 255, 0.7);
+    border-bottom-left-radius: 10px;
+}
+.menu__item:last-of-type {
+    border-left: 1px solid rgba(255, 255, 255, 0.7);
+    border-bottom-right-radius: 10px;
+}
+.menu__item:hover {
+    background-color: #669ddb;
+}
 .container {
     width: 384px;
-    margin: 50px auto;
+    margin: 100px auto;
 }
 .content {
     height: 768px;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.9);
     text-align: center;
+    transition: height 0.1s ease-in-out;
 }
 .content__title {
     display: inline-block;
-    width: 190px;
     text-align: center;
     font-size: 24px;
     font-weight: 700;
@@ -55,13 +93,26 @@ sub {
     border-bottom: 3px solid #2278da;
     transition: width 0.1s ease-in-out;
 }
-.content__title:hover {
-    width: 200px;
+#content__title-vols {
+    width: 275px;
+}
+#content__title-gen5 {
+    display: none;
+    width: 245px;
+}
+#content__title-vols:hover {
+    width: 280px;
+}
+#content__title-gen5:hover {
+    width: 250px;
 }
 .content__info-text {
     font-size: 16px;
     text-align: center;
     margin: 10px auto 3px;
+}
+.content__info-text-vols {
+    display: inline-block;
 }
 .content__input {
     width: 300px;
@@ -73,6 +124,9 @@ sub {
     outline: none;
     border-bottom: 2px solid #e9e9e9;
     transition: border-bottom 0.15s ease-in-out;
+}
+.content__input-vols {
+    display: inline-block;
 }
 .content__input:focus {
     border-bottom: 2px solid #2278da;
@@ -98,4 +152,16 @@ sub {
 }
 .btn:hover {
     background-color: #26aa26;
+}
+
+#gen5-form {
+    display: none;
+}
+#calculate-gen5 {
+    display: none;
+}
+
+#gen5-power-text,
+#gen5-power-out {
+    display: none;
 }

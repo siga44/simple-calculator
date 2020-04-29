@@ -1,29 +1,93 @@
-const calcBtn = document.getElementById("calculate");
-const inputs = document.querySelectorAll(".content__input");
+const calcVolsBtn = document.getElementById("calculate-vols"),
+  calcGen5Btn = document.getElementById("calculate-gen5"),
+  vols = document.getElementById("vols-btn"),
+  gen5 = document.getElementById("gen5-btn"),
+  inputs = document.querySelectorAll(".content__input"),
+  menu = document.getElementById("menu"),
+  volsTitle = document.getElementById("content__title-vols"),
+  gen5Title = document.getElementById("content__title-gen5"),
+  volsForm = document.getElementById("vols-form"),
+  gen5Form = document.getElementById("gen5-form"),
+  heightControl = document.getElementById("content-height"),
+  volsLossOutput = document.getElementById("vols-loss-out"),
+  gen5BudgetOutput = document.getElementById("gen5-power-out"),
+  volsLossText = document.getElementById("vols-loss-text"),
+  gen5BudgetText = document.getElementById("gen5-power-text");
 
-calcBtn.addEventListener("click", calculatePrice);
+let lastKnownPos = 0;
 
-function calculatePrice() {
-  let lineLength = inputs[0].value;
-  let buildLength = inputs[1].value;
-  let weldLoss = inputs[2].value;
-  let attenuationCoef = inputs[3].value;
-  let plugLoss = inputs[4].value;
-  let plugCount = inputs[5].value;
-  let totalLoss =
-    lineLength * attenuationCoef +
-    (lineLength / buildLength + 1) * weldLoss +
-    plugCount * plugLoss;
-  displayPrice(totalLoss.toFixed(3));
+calcVolsBtn.addEventListener("click", calculateVolsLoss);
+calcGen5Btn.addEventListener("click", calculateGen5Budget);
+vols.addEventListener("click", displayVols);
+gen5.addEventListener("click", displayGen5);
+window.addEventListener("scroll", () => {
+  if (window.scrollY > lastKnownPos) {
+    menu.style.transform = "translate(-150px, -45px)";
+    menu.style.transition = "transform .133s ease-in-out";
+    lastKnownPos = window.scrollY;
+  } else {
+    menu.style.transform = "translateX(-150px)";
+    lastKnownPos = window.scrollY;
+  }
+});
+
+function displayVols() {
+  for (let item of [
+    gen5Title,
+    gen5Form,
+    calcGen5Btn,
+    gen5BudgetOutput,
+    gen5BudgetText,
+  ]) {
+    item.style.display = "none";
+  }
+  for (let item of [volsForm, calcVolsBtn, volsLossText]) {
+    item.style.display = "block";
+  }
+  for (let item of [volsLossOutput, volsTitle]) {
+    item.style.display = "inline-block";
+  }
+  heightControl.style.height = "768px";
 }
 
-function displayPrice(totalLoss) {
+function displayGen5() {
+  for (let item of [
+    volsTitle,
+    volsForm,
+    calcVolsBtn,
+    volsLossOutput,
+    volsLossText,
+  ]) {
+    item.style.display = "none";
+  }
+  for (let item of [gen5Form, calcGen5Btn, gen5BudgetText]) {
+    item.style.display = "block";
+  }
+  for (let item of [gen5BudgetOutput, gen5Title]) {
+    item.style.display = "inline-block";
+  }
+  heightControl.style.height = "1130px";
+}
+
+function calculateVolsLoss() {
+  let totalLoss =
+    inputs[0].value * inputs[3].value +
+    (inputs[0].value / inputs[1].value + 1) * inputs[2].value +
+    inputs[5].value * inputs[4].value;
+  displayLoss(totalLoss.toFixed(3));
+}
+
+function calculateGen5Budget() {
+  console.log("hi");
+}
+
+function displayLoss(totalLoss) {
   if (isNaN(totalLoss)) {
     totalLoss = "неверное значение";
-    document.getElementById("price").style.color = "rgb(149, 31, 31)";
-    document.getElementById("price").innerHTML = totalLoss;
+    volsLossOutput.style.color = "rgb(149, 31, 31)";
+    volsLossOutput.innerHTML = totalLoss;
   } else {
-    document.getElementById("price").style.color = "#26aa26";
-    document.getElementById("price").innerHTML = totalLoss;
+    volsLossOutput.style.color = "#26aa26";
+    volsLossOutput.innerHTML = totalLoss;
   }
 }
