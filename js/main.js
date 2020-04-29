@@ -22,11 +22,11 @@ vols.addEventListener("click", displayVols);
 gen5.addEventListener("click", displayGen5);
 window.addEventListener("scroll", () => {
   if (window.scrollY > lastKnownPos) {
-    menu.style.transform = "translate(-150px, -45px)";
+    menu.style.transform = "translate(0, -45px)";
     menu.style.transition = "transform .133s ease-in-out";
     lastKnownPos = window.scrollY;
   } else {
-    menu.style.transform = "translateX(-150px)";
+    menu.style.transform = "translateX(0)";
     lastKnownPos = window.scrollY;
   }
 });
