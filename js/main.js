@@ -1,8 +1,10 @@
+// Объявление констант и переменных
 const calcVolsBtn = document.getElementById("calculate-vols"),
   calcGen5Btn = document.getElementById("calculate-gen5"),
   vols = document.getElementById("vols-btn"),
   gen5 = document.getElementById("gen5-btn"),
-  inputs = document.querySelectorAll(".content__input"),
+  inputsVols = document.querySelectorAll(".content__input-vols"),
+  inputsGen5 = document.querySelectorAll(".content__input-gen5"),
   menu = document.getElementById("menu"),
   volsTitle = document.getElementById("content__title-vols"),
   gen5Title = document.getElementById("content__title-gen5"),
@@ -12,17 +14,23 @@ const calcVolsBtn = document.getElementById("calculate-vols"),
   volsLossOutput = document.getElementById("vols-loss-out"),
   gen5BudgetOutput = document.getElementById("gen5-power-out"),
   volsLossText = document.getElementById("vols-loss-text"),
-  gen5BudgetText = document.getElementById("gen5-power-text");
+  gen5BudgetText = document.getElementById("gen5-power-text"),
+  connectionBg = document.getElementById("bg-block");
 
 let lastKnownPos = 0;
 
+// ~~~~~~~~~~~~
+// Мониторинг событий на кпопке, при клике вызывается определенная функция
 calcVolsBtn.addEventListener("click", calculateVolsLoss);
 calcGen5Btn.addEventListener("click", calculateGen5Budget);
 vols.addEventListener("click", displayVols);
 gen5.addEventListener("click", displayGen5);
+
+// ~~~~~~~~~~~~
+// Украшалка, чтобы меню исчезало и появлялось при скролле
 window.addEventListener("scroll", () => {
   if (window.scrollY > lastKnownPos) {
-    menu.style.transform = "translate(0, -45px)";
+    menu.style.transform = "translateY(-45px)";
     menu.style.transition = "transform .133s ease-in-out";
     lastKnownPos = window.scrollY;
   } else {
@@ -31,6 +39,9 @@ window.addEventListener("scroll", () => {
   }
 });
 
+// ~~~~~~~~~~~~
+// Функции, выполняющиеся при смене типа калькулятора
+
 function displayVols() {
   for (let item of [
     gen5Title,
@@ -38,6 +49,7 @@ function displayVols() {
     calcGen5Btn,
     gen5BudgetOutput,
     gen5BudgetText,
+    connectionBg,
   ]) {
     item.style.display = "none";
   }
@@ -60,7 +72,7 @@ function displayGen5() {
   ]) {
     item.style.display = "none";
   }
-  for (let item of [gen5Form, calcGen5Btn, gen5BudgetText]) {
+  for (let item of [gen5Form, calcGen5Btn, gen5BudgetText, connectionBg]) {
     item.style.display = "block";
   }
   for (let item of [gen5BudgetOutput, gen5Title]) {
@@ -69,25 +81,52 @@ function displayGen5() {
   heightControl.style.height = "1130px";
 }
 
+// ~~~~~~~~~~~~
+// ВЫЧИСЛЕНИЯ
+
+// Расчёт для ВОЛС
 function calculateVolsLoss() {
   let totalLoss =
-    inputs[0].value * inputs[3].value +
-    (inputs[0].value / inputs[1].value + 1) * inputs[2].value +
-    inputs[5].value * inputs[4].value;
-  displayLoss(totalLoss.toFixed(3));
+    inputsVols[0].value * inputsVols[3].value +
+    (inputsVols[0].value / inputsVols[1].value + 1) * inputsVols[2].value +
+    inputsVols[5].value * inputsVols[4].value;
+  displayOutput(totalLoss.toFixed(3), volsLossOutput);
 }
 
+// Расчёт для 5G
 function calculateGen5Budget() {
-  console.log("hi");
+  let actx = 0,
+    grx = 0,
+    totalBudget =
+      inputsGen5[1].value -
+      inputsGen5[0].value +
+      parseInt(inputsGen5[2].value) -
+      actx +
+      grx -
+      inputsGen5[3].value -
+      inputsGen5[4].value -
+      inputsGen5[5].value -
+      inputsGen5[6].value -
+      inputsGen5[7].value -
+      inputsGen5[8].value -
+      inputsGen5[9].value;
+  console.log(totalBudget);
+  displayOutput(totalBudget.toFixed(3), gen5BudgetOutput);
 }
 
-function displayLoss(totalLoss) {
-  if (isNaN(totalLoss)) {
-    totalLoss = "неверное значение";
-    volsLossOutput.style.color = "rgb(149, 31, 31)";
-    volsLossOutput.innerHTML = totalLoss;
+// ~~~~~~~~~~~~
+// Выходные значения
+
+function displayOutput(totalValue, totalText) {
+  if (isNaN(totalValue)) {
+    totalValue = "неверное значение";
+    totalText.style.color = "rgb(149, 31, 31)";
+    totalText.innerHTML = totalValue;
+  } else if (totalValue < 0) {
+    totalText.style.color = "rgb(149, 31, 31)";
+    totalText.innerHTML = totalValue;
   } else {
-    volsLossOutput.style.color = "#26aa26";
-    volsLossOutput.innerHTML = totalLoss;
+    totalText.style.color = "#26aa26";
+    totalText.innerHTML = totalValue;
   }
 }
