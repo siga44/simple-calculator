@@ -84,7 +84,7 @@ function displayGen5() {
 // ~~~~~~~~~~~~
 // ВЫЧИСЛЕНИЯ
 
-// Расчёт для ВОЛС
+// Рассчёт для ВОЛС
 function calculateVolsLoss() {
   let totalLoss =
     inputsVols[0].value * inputsVols[3].value +
@@ -93,7 +93,7 @@ function calculateVolsLoss() {
   displayOutput(totalLoss.toFixed(3), volsLossOutput);
 }
 
-// Расчёт для 5G
+// Рассчёт для 5G
 function calculateGen5Budget() {
   let actx = 0,
     grx = 0,
@@ -110,7 +110,6 @@ function calculateGen5Budget() {
       inputsGen5[7].value -
       inputsGen5[8].value -
       inputsGen5[9].value;
-  console.log(totalBudget);
   displayOutput(totalBudget.toFixed(3), gen5BudgetOutput);
 }
 
